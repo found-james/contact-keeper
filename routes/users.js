@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const express = require("express");
+const dotEnv = require("dotenv");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 
@@ -30,7 +32,14 @@ router.post("/", [
 
             user.password = await bcrypt.hash(password, salt);
             await user.save();
-            res.send("user saved");
+            
+            const payload = {
+                user: {
+                    id : user.id
+                }
+            }
+
+            jwt.sign(payload, )
 
         } catch (err) {
             res.status(500).json({ success: false, msg: err.message });
