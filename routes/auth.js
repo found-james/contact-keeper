@@ -5,11 +5,23 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 
+const auth = require("../middleware/auth");
 const User = require("../models/User");
 
-router.get("/", (req, res) => {
-    res.send('get logged user');
+// get logged in user
+// auth protects the route 
+router.get("/", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("-password");
+        res.json(user);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("server error");
+    }
 });
+
+// login user
 
 router.post("/", [ check("email", "include a valid email").isEmail(), check("password", "password is required").exists()], async (req, res) => {
     const errors = validationResult( req );
