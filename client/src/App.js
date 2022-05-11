@@ -1,12 +1,25 @@
-import Navbar from './components/layout/Navbar';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Fragment } from "react";
+
+import Navbar from "./components/layout/Navbar";
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <Router>
+      <Fragment>
       <Navbar />
-      <h1>my app</h1>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path ="/about" element={<About />} />
+        </Routes>
       </div>
+      </Fragment>
+    </Router>
   );
 }
 
