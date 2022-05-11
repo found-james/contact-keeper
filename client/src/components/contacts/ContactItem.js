@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ContactItem({ contact }) {
     const { id, name, email, phone, type } = contact;
@@ -11,10 +12,15 @@ function ContactItem({ contact }) {
         <ul className="list">
             { email && (<li><i className="fas fa-envelope-open" /> { email }</li>) }
             { phone && (<li><i className="fas fa-phone" /> { phone }</li>)}
-
         </ul>
+        <button className="btn btn-dark btn-sm">Edit</button>
+        <button className="btn btn-danger btn-sm">Delete</button>
     </div>
-  )
-}
+  );
+};
 
-export default ContactItem
+ContactItem.propTypes = {
+    contact: PropTypes.object.isRequired
+};
+
+export default ContactItem;
