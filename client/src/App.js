@@ -8,6 +8,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import ContactState from "./components/context/contact/ContactState";
 import AuthState from "./components/context/auth/AuthState";
+import AlertState from "./components/context/auth/Alerttate";
+
 
 import "./App.css";
 
@@ -15,6 +17,7 @@ function App() {
   return (
     <AuthState>
     <ContactState>
+    <AlertState>
     <Router>
       <Fragment>
       <Navbar />
@@ -28,6 +31,7 @@ function App() {
       </div>
       </Fragment>
     </Router>
+    </AlertState>
     </ContactState>
     </AuthState>
   );
