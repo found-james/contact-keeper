@@ -6,11 +6,13 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 
 import ContactState from "./components/context/contact/ContactState";
+import AuthState from "./components/context/auth/AuthState";
 
 import "./App.css";
 
 function App() {
   return (
+    <AuthState>
     <ContactState>
     <Router>
       <Fragment>
@@ -24,6 +26,7 @@ function App() {
       </Fragment>
     </Router>
     </ContactState>
+    </AuthState>
   );
 }
 
