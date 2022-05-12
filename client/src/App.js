@@ -9,7 +9,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import ContactState from "./components/context/contact/ContactState";
 import AuthState from "./components/context/auth/AuthState";
-import AlertState from "./components/context/auth/Alerttate";
+import AlertState from "./components/context/alert/AlertState";
 
 
 import "./App.css";
