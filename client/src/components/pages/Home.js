@@ -2,6 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import Contacts from "../contacts/Contacts";
 import ContactForm from "../contacts/ContactForm";
+import ContactFilter from "../contacts/ContactFilter";
 
 export default function Home () {
     return (
@@ -11,6 +12,7 @@ export default function Home () {
                    <ContactForm />
                 </div>
                 <div>
+                    <ContactFilter />
                     <Contacts />
                 </div>
             </div>
