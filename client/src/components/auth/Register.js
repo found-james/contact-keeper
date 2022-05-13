@@ -30,7 +30,7 @@ function Register() {
     };
 
     useEffect(() => {
-        if (error === "User already exists"){
+        if (error === "user already exists"){
             setAlert(error, "danger");
             clearErrors();
         }
