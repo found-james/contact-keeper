@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AlertContext from "../context/alert/alertContext";
 import AuthContext from "../context/auth/authContext";
 
@@ -7,14 +7,9 @@ function Register() {
     const authContext = useContext(AuthContext);
 
     const { setAlert } = alertContext;
-    const { register } = authContext;
+    const { register, error, clearErrors } = authContext;
 
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password2: ""
-    });
+    const [user, setUser] = useState({ name: "", email: "",password: "", password2: "" });
 
     const { name, email, password, password2 } = user;
 
@@ -33,6 +28,15 @@ function Register() {
             register({ name, email, password });
         }
     };
+
+    useEffect(() => {
+        if (error === "User already exists"){
+            setAlert(error, "danger");
+            clearErrors();
+        }
+    }, [error]);
+
+
     
     return (
         <div className="form-container">

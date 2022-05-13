@@ -18,7 +18,7 @@ const AuthState = props => {
     const loadUser = () => console.log( "loadUser");
     const login = () => console.log( "login");
     const logout = () => console.log( "logout");
-    const clearErrors = () => console.log( "clearErrors");
+    const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
     const register = async formData => {
         const config = { headers : { "Content-type": "application/json"} }
