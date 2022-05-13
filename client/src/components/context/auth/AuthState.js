@@ -15,7 +15,17 @@ const AuthState = props => {
 
     const [state, dispatch] = useReducer(authReducer, initialState);
     // actions: load, register, login, logout (user)
-    const loadUser = () => console.log( "loadUser");
+    const loadUser = async () => {
+        // @todo - load token into gloabl headers
+        try {
+            const res = await axios.get("/api/auth");
+            dispatch({ type: USER_LOADED, payload: res.data });
+
+        } catch (err) {
+            dispatch({ type: AUTH_ERROR });
+        }
+    };
+
     const login = () => console.log( "login");
     const logout = () => console.log( "logout");
     const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
