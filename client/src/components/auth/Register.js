@@ -1,17 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AlertContext from "../context/alert/alertContext";
+import AuthContext from "../context/auth/authContext";
 
-function Register() {
+function Register(props) {
     const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
+    let navigate = useNavigate();
 
     const { setAlert } = alertContext;
+    const { register, error, clearErrors, isAuthenticated } = authContext;
 
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password2: ""
-    });
+    const [user, setUser] = useState({ name: "", email: "",password: "", password2: "" });
 
     const { name, email, password, password2 } = user;
 
@@ -20,15 +20,30 @@ function Register() {
     }
 
     const onSubmit = e => {
+
         e.preventDefault();
         if (name === "" || email === "" || password === ""){
             setAlert("Please enter all fields", "danger");
         } else if (password !== password2){
             setAlert("Passwords do not match", "danger");
         } else {
-            console.log("register sbmit");
+            register({ name, email, password });
         }
-    }
+    };
+
+    useEffect(() => {
+        if (isAuthenticated){
+            navigate("/");
+        }
+
+        if (error === "user already exists"){
+            setAlert(error, "danger");
+            clearErrors();
+        }
+        // eslint-disable-next-line 
+    }, [error, isAuthenticated, props.history]);
+
+
     
     return (
         <div className="form-container">
