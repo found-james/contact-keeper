@@ -10,6 +10,7 @@ export default function Home () {
 
     useEffect(() => {
         authContext.loadUser();
+        console.log("@home.js", authContext);
         //eslint-disable-next-line
     },[]);
     
