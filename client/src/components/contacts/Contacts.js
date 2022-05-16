@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ContactItem from "./ContactItem";
 import ContactContext from "../context/contact/contactContext";
@@ -6,11 +6,17 @@ import ContactContext from "../context/contact/contactContext";
 function Contacts() {
     const contactContext = useContext(ContactContext);
 
-    const { contacts, filtered } = contactContext;
+    const { contacts, filtered, getContacts, loading } = contactContext;
 
-    if (contacts.length === 0) {
-        return (<h4>Please add contact</h4>);
-    }
+
+    useEffect(() => { 
+         getContacts();
+        
+    },[]);
+
+    // if (contacts !== null && contacts.length === 0 && !loading) {
+    //     return (<h4>Please add contact</h4>);
+    // }
 
     const filteredMap = contact => (
         <CSSTransition key={contact._id} timeout={500} classNames="item">
@@ -29,8 +35,7 @@ function Contacts() {
       <Fragment>
           <TransitionGroup>
             { 
-            filtered !== null ? filtered.map(filteredMap) : contacts.map(contactsMap)
-
+            filtered !== null ? filtered.map(filteredMap) : contacts && contacts.map(contactsMap)
             }
           </TransitionGroup>
       </Fragment>
